@@ -1,8 +1,10 @@
-import { Autocomplete } from './Autocomplete.js';
-import { countries } from './data.js';
+import { Input } from "./input.js";
+import { List } from "./list.js";
 
-window.onload = () => {
-    const inputElement = document.getElementById("autocomplete-input");
-    const listElement = document.getElementById("autocomplete-list");
-    new Autocomplete(inputElement, listElement, countries);
-};
+const searchSection = document.querySelector(".search__input-options");
+
+const newListInstance = new List();
+const newInputInstance = new Input(newListInstance.searchWithDelay);
+
+searchSection.appendChild(newInputInstance.inputElement);
+searchSection.appendChild(newListInstance.dataListElement);
