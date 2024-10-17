@@ -1,0 +1,91 @@
+/* General Section Styles */
+section {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Input Container Styles */
+.input__suggestion {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+/* Input Styles */
+#search-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* Autocomplete Suggestion Placeholder */
+#autocomplete-suggestion {
+  position: absolute;
+  padding: 0.5rem;
+  padding-left: 0.6rem;
+  opacity: 0.5;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* List Styles for Autocomplete Options */
+.autocomplete-options {
+  list-style-type: none;
+  position: absolute;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0px;
+  width: 100%;
+  top: 2.5rem;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  background: white;
+  z-index: 3;
+}
+
+/* Individual List Item Styles */
+.autocomplete-options li {
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-top: 1px solid #f1f1f1;
+}
+
+.autocomplete-options li:first-child {
+  border-top: none;
+}
+
+.autocomplete-options li:hover {
+  background-color: #f1f1f1;
+}
+
+/* Highlighting the Matching Query */
+.highlighted {
+  font-weight: bold;
+}
+
+/* Main Container for Search Input Options */
+.search__input-options {
+  position: relative;
+  width: 300px; /* Adjust as needed for desired width */
+}
+
+/* Title and General Typography */
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+label {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
