@@ -12,7 +12,6 @@ export class Calendar {
     this.rootElement = root;
     this.maxYearsRangeCount = 25;
     const calendarHTML = `<section class="calendar__header"></section>`;
-    // TODO: Create separate section foe header, month, footer.
     this.calendarElement = getElementFromHtml(calendarHTML);
     this.rootElement.append(this.calendarElement);
 
