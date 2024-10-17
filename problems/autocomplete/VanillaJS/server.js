@@ -30,6 +30,14 @@ const items = [
     "sib",
 ];
 
+async function fetchProductFromApi() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(items)
+;    }, 500);
+  });
+}
+
 async function searchProducts(searchQuery) {
     if (!searchQuery) return [];
     return items.filter((item) => {
