@@ -60,8 +60,9 @@ export class UIManager {
     tasks.forEach(task => {
       const taskItem = document.createElement("div");
       taskItem.className = "task-item";
+      const titleStyle = task.status === 'Completed' ? 'style="text-decoration: line-through"' : '';
       taskItem.innerHTML = `
-        <h3>${task.title} (${task.status})</h3>
+        <h3 ${titleStyle}>${task.title} (${task.status})</h3>
         <p>${task.description}</p>
         <button class="mark-complete" data-id="${task.id}">Mark as Complete</button>
         <button class="delete-task" data-id="${task.id}">Delete</button>
