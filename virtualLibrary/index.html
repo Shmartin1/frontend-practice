@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Library</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Virtual Library</h1>
+
+        <form id="book-form">
+            <input type="text" id="book-title" placeholder="Book Title" required>
+            <input type="text" id="book-author" placeholder="Author" required>
+            <input type="date" id="book-pub-date" required>
+            <input type="text" id="book-genre" placeholder="Genre" required>
+            <button type="submit">Add Book</button>
+        </form>
+
+        <select id="filter-options">
+            <option value="All">All</option>
+            <option value="Available">Available</option>
+            <option value="Borrowed">Borrowed</option>
+        </select>
+
+        <div id="book-list"></div>
+    </div>
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>
