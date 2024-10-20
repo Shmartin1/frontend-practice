@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Catalog -->
+        <section id="product-catalog">
+            <h2>Product Catalog</h2>
+            <div id="product-list" class="product-list">
+                <!-- Product items will be dynamically injected here -->
+            </div>
+        </section>
+
+        <!-- Shopping Cart Section -->
+        <section id="shopping-cart">
+            <h2>Your Shopping Cart</h2>
+            <div id="cart-list" class="cart-list">
+                <!-- Cart items will be dynamically injected here -->
+            </div>
+            <div id="cart-summary">
+                <p>Total Items: <span id="total-items">0</span></p>
+                <p>Total Cost: $<span id="total-cost">0.00</span></p>
+            </div>
+        </section>
+    </div>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
