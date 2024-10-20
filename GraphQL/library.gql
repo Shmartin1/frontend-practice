@@ -1,0 +1,107 @@
+# TPYES
+type Book {
+    id: ID!
+    title: String!
+    author: Author!
+    available: Boolean!
+}
+
+type Author {
+    id: ID!
+    name: String!
+    books: [Book!]!
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    borrowedBooks: [Book!]!
+}
+
+type Query {
+    book(id: ID!): Book
+    author(id: ID!): Author
+    user(id: ID!): User
+    allBooks: [Book!]!
+    allAuthors: [Author!]!
+}
+
+type Mutation {
+    addBook(title: String!, authorId: ID!): Book!
+    borrowBook(userId: ID!, bookId: ID!): Book!
+    returnBook(userId: ID!, bookId: ID!): Book!
+}
+
+# FRAGMENTS
+fragment BookDetails on Book {
+    id
+    title
+    available
+    author {
+        ...AuthorDetails
+    }
+}
+
+fragment AuthorDetails on Author {
+    id
+    name
+}
+
+fragment UserDetails on User {
+    id
+    name
+    email
+    borrowedBooks {
+        ...BookDetails
+    }
+}
+
+
+# QUERIES
+query GetBook($id: ID!) {
+    book(id: $id) {
+        ...BookDetails
+    }
+}
+
+query GetAllBooks() {
+    allBooks {
+        ...BookDetails
+    }
+}
+
+query GetAuthor($id: ID!) {
+    author(id: $id) {
+        ...AuthorDetails
+        books {
+            ...BookDetails
+        }
+    }
+}
+
+query GetUser($id: ID!) {
+    user(id: $id) {
+        ...UserDetails
+    }
+}
+
+# MUTATIONS
+
+mutation AddBook($title: String!, $authorId: ID!) {
+    addBook(title: $title, authorId: $authorId) {
+        ...BookDetails
+    }
+}
+
+mutation BorrowBook($userId: ID!, $bookId: ID!) {
+    borrowBook(userId: $userId, bookId: $bookId) {
+        ...BookDetails
+    }
+}
+
+mutation ReturnBook($userId: ID!, $bookId: ID!) {
+    returnBook(userId: $userId, bookId: $bookId) {
+        ...BookDetails
+    }
+}
