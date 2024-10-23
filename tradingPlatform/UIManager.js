@@ -16,6 +16,10 @@ export class UIManager {
         this.buyAssetForm = document.querySelector('#buy-asset-form');
         this.assetQuantityInput = document.querySelector('#asset-quantity');
         this.closeModalButton = document.querySelector('#close-modal');
+        this.sellModal = document.querySelector('#sell-modal');
+        this.sellAssetForm = document.querySelector('#sell-asset-form');
+        this.sellQuantityInput = document.querySelector('#sell-quantity');
+        this.closeSellModalButton = document.querySelector('#close-sell-modal');
 
         // Render initial data
         this.renderAssetList();
@@ -49,12 +53,25 @@ export class UIManager {
                 this.openBuyModal(assetId);
             }
         });
-
-        // Close modal handler
+    
+        // Sell button click handler in portfolio list
+        this.portfolioListContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('sell-asset')) {
+                const assetId = parseInt(e.target.dataset.id);
+                this.openSellModal(assetId);
+            }
+        });
+    
+        // Close buy modal handler
         this.closeModalButton.addEventListener('click', () => {
             this.closeBuyModal();
         });
-
+    
+        // Close sell modal handler
+        this.closeSellModalButton.addEventListener('click', () => {
+            this.closeSellModal();
+        });
+    
         // Buy asset form submission handler
         this.buyAssetForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -65,6 +82,21 @@ export class UIManager {
                 this.renderPortfolio();
                 this.renderTransactionHistory();
                 this.closeBuyModal();
+            } else {
+                alert('Invalid quantity. Please enter a valid number.');
+            }
+        });
+    
+        // Sell asset form submission handler
+        this.sellAssetForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const quantity = parseInt(this.sellQuantityInput.value);
+            if (this.selectedAsset && !isNaN(quantity) && quantity > 0) {
+                this.user.sellAsset(this.selectedAsset, quantity);
+                this.renderUserBalance();
+                this.renderPortfolio();
+                this.renderTransactionHistory();
+                this.closeSellModal();
             } else {
                 alert('Invalid quantity. Please enter a valid number.');
             }
@@ -87,7 +119,7 @@ export class UIManager {
     renderUserBalance() {
         this.userBalanceContainer.textContent = this.user.balance.toFixed(2);
     }
-
+    
     renderPortfolio() {
         this.portfolioListContainer.innerHTML = '';
         this.user.portfolio.assets.forEach((quantity, asset) => {
@@ -95,11 +127,12 @@ export class UIManager {
             portfolioElement.className = 'portfolio-item';
             portfolioElement.innerHTML = `
                 <span>${asset.name} (${asset.ticker}) - Quantity: ${quantity}</span>
+                <button class="sell-asset" data-id="${asset.id}">Sell</button>
             `;
             this.portfolioListContainer.appendChild(portfolioElement);
         });
     }
-
+    
     renderTransactionHistory() {
         this.transactionListContainer.innerHTML = '';
         this.user.transactionHistory.forEach(trade => {
@@ -111,17 +144,30 @@ export class UIManager {
             this.transactionListContainer.appendChild(transactionElement);
         });
     }
-
+    
     openBuyModal(assetId) {
         this.selectedAsset = this.assets.find(asset => asset.id === assetId);
         if (this.selectedAsset) {
             this.buyModal.classList.remove('hidden');
         }
     }
-
+    
     closeBuyModal() {
         this.selectedAsset = null;
         this.assetQuantityInput.value = '';
         this.buyModal.classList.add('hidden');
+    }
+    
+    openSellModal(assetId) {
+        this.selectedAsset = this.assets.find(asset => asset.id === assetId);
+        if (this.selectedAsset) {
+            this.sellModal.classList.remove('hidden');
+        }
+    }
+    
+    closeSellModal() {
+        this.selectedAsset = null;
+        this.sellQuantityInput.value = '';
+        this.sellModal.classList.add('hidden');
     }
 }
